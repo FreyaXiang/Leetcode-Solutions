@@ -1,0 +1,64 @@
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+import java.util.*;
+class Solution {
+    public boolean isPalindrome(ListNode head) {
+        // Method 2: With stack
+        Stack<Integer> seen=new Stack<>();
+        ListNode slow=head;
+        ListNode fast=head;
+        while (fast!=null && fast.next!=null) {
+            seen.push(slow.val);
+            slow=slow.next;
+            fast=fast.next.next;
+        }
+        if (fast!=null) slow=slow.next;
+        while(slow!=null) {
+            int peek=seen.pop();
+            if (peek!=slow.val) {
+                return false;
+            }
+            slow=slow.next;
+        }
+        return true;
+            
+        /*
+        // Method 1: Without Stack
+        // find middle
+        ListNode slow=head;
+        ListNode fast=head;
+        while (fast!=null && fast.next!=null) {
+            slow=slow.next;
+            fast=fast.next.next;
+        }
+        if (fast!=null) slow=slow.next;
+        // reverse the second half
+        ListNode previous=null;
+        ListNode current=slow;
+        while (current!=null) {
+            ListNode temp=current.next;
+            current.next=previous;
+            previous=current;
+            current=temp; 
+        }
+        // compare the two pointers: previous and head
+        while (previous!=null) {
+            if (head.val!=previous.val) {
+                return false;
+            }
+            previous=previous.next;
+            head=head.next;
+        }
+        return true;
+        */
+           
+    }
+}
