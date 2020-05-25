@@ -1,0 +1,101 @@
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+import java.util.*;
+class Solution {
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        /*
+        // Method1: reverse the two linkedlist and reverse the output, do as before
+        ListNode current1=l1;
+        ListNode previous1=null;
+        while (current1!=null) {
+            ListNode temp=current1.next;
+            current1.next=previous1;
+            previous1=current1;
+            current1=temp;
+        }
+        ListNode current2=l2;
+        ListNode previous2=null;
+        while (current2!=null) {
+            ListNode temp=current2.next;
+            current2.next=previous2;
+            previous2=current2;
+            current2=temp;
+        }
+        
+        ListNode head=new ListNode(0);
+        ListNode current=head;
+        int carry=0;
+        while (previous1!=null || previous2!=null) {
+            int v1=previous1==null? 0:previous1.val;
+            int v2=previous2==null? 0:previous2.val;
+            
+            current.next=new ListNode((v1+v2+carry)%10);                  
+            carry=(v1+v2+carry)/10;
+            if (previous1!=null) previous1=previous1.next;
+            if (previous2!=null) previous2=previous2.next;
+            current=current.next;
+                                      
+        }
+        if (carry>0) {
+            current.next=new ListNode(carry);
+        } 
+        ListNode current3=head.next;
+        ListNode previous3=null;
+        while (current3!=null) {
+            ListNode temp=current3.next;
+            current3.next=previous3;
+            previous3=current3;
+            current3=temp;
+        }
+        return previous3; */
+        
+        // Method2: use two stacks (does not need to modify original linkedlist)
+        Stack<Integer> first=new Stack<>();
+        ListNode current1=l1;
+        while (current1!=null) {
+            first.push(current1.val);
+            current1=current1.next;
+        }
+        
+        Stack<Integer> second=new Stack<>();
+        ListNode current2=l2;
+        while (current2!=null) {
+            second.push(current2.val);
+            current2=current2.next;
+        }
+        
+        ListNode head=new ListNode(0);
+        ListNode current=head;
+        int carry=0, sum=0;
+        while (!first.isEmpty() || !second.isEmpty()) {
+            int v1=first.isEmpty()? 0:first.pop();
+            int v2=second.isEmpty()? 0:second.pop();
+            sum=v1+v2+carry;
+            current.next=new ListNode(sum%10);
+            carry=sum/10;
+            current=current.next;  
+        }
+         if (carry>0) {
+            current.next=new ListNode(carry);
+        } 
+        
+        ListNode current3=head.next;
+        ListNode previous3=null;
+        while (current3!=null) {
+            ListNode temp=current3.next;
+            current3.next=previous3;
+            previous3=current3;
+            current3=temp;
+        }
+        return previous3; 
+        
+    }
+}
