@@ -1,0 +1,72 @@
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+import java.util.*;
+class Solution {
+    public ListNode deleteDuplicates(ListNode head) {
+        // Second Method: O(n^2) O(1)
+        ListNode current=head;
+        ListNode previous=null;
+        while (current!=null && current.next!=null) {
+            boolean isDistinct=true;
+            // !!!!!!!!! next line!!!
+            while (current.next!=null && current.val==current.next.val) {
+                current.next=current.next.next;
+                isDistinct=false;
+            }
+            if (!isDistinct) {
+                if (current==head) {
+                    head=current.next;
+                    current=head;
+                } else {
+                    previous.next=current.next;   
+                    current=current.next;
+                }
+            } else {
+                previous=current;
+                current=current.next;
+            }
+             
+        }
+        return head;
+        
+        /* First Method: O(n) O(n)
+        if (head==null) return null;
+        ListNode current=head.next;
+        ListNode previous=head;
+        HashSet<Integer> seen=new HashSet<>();
+        while (current!=null) {
+            if (previous.val==current.val) {
+                seen.add(previous.val);
+                previous.next=current.next;
+                current=current.next;
+            } else {
+                previous=current;
+                current=current.next;
+            }
+        }
+        ListNode current2=head;
+        ListNode previous2=null;
+        while (current2!=null) {
+            if (previous2==null && seen.contains(current2.val)) {
+                head=current2.next;
+                current2=head;
+            } else if (seen.contains(current2.val)) {
+                previous2.next=current2.next;
+                current2=current2.next;
+            } else {
+                previous2=current2;
+                current2=current2.next;
+            }
+        }
+        return head;  */
+        
+    }
+}
