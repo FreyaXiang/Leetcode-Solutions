@@ -1,0 +1,19 @@
+class Solution {
+    public int removeDuplicates(int[] arr) {
+        // one pass
+        // better use a for loop for j pointer
+        if (arr.length==0) return 0;
+        int i=0;
+        int j=1;
+        int count=1;
+        while (j<arr.length) {
+            if (arr[j]!=arr[i]) {
+                arr[++i]=arr[j++];
+                count++;
+            } else {
+                j++;
+            }
+        }
+        return count; 
+    }
+}
