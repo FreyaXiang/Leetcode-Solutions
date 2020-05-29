@@ -1,0 +1,63 @@
+class Solution {
+    public int maxSubArray(int[] nums) {
+        if (nums==null || nums.length==0) throw new IllegalArgumentException();
+        /*
+        // Method 1: most stupid method
+        // O(n^3) O(1)
+        int maxSum=Integer.MIN_VALUE;
+        // start
+        for (int i=0; i<nums.length; i++) {
+            // end
+            for (int j=i; j<nums.length; j++) {
+                
+                int subSum=0;
+                for (int k=i; k<=j; k++) {
+                    subSum+=nums[k];
+                }
+                maxSum=Math.max(subSum, maxSum);
+            }
+        }
+        return maxSum; */
+        
+        /*
+        // Method 2: brute force
+        // O(n^2) O(1)
+        int maxSum=Integer.MIN_VALUE;
+        for (int i=0; i<nums.length; i++) {
+            int subSum=0;
+            for (int j=i; j<nums.length; j++) {
+                subSum+=nums[j];
+                maxSum=Math.max(subSum, maxSum);
+            }
+        }
+        return maxSum; */
+        
+        
+        // Method 3: Dynamic Programming 
+        // Version 1
+        // O(n) O(n)
+        int[] dp=new int[nums.length];
+        int maxSum=nums[0];
+        for (int i=1; i<nums.length; i++) {
+            dp[i]=Math.max(nums[i-1]+nums[i], nums[i]);
+            maxSum=Math.max(maxSum,dp[i]);
+        }
+        return maxSum;
+        
+        
+        /*
+        // Method 3: Dynamic Programming 
+        // Version 2
+        // O(n) O(1)
+        int maxSum=nums[0], currMax=nums[0];
+        for (int i=1; i<nums.length; i++) {
+            currMax=Math.max(nums[i], currMax+nums[i]);
+            maxSum=Math.max(maxSum,currMax);
+        }
+        return maxSum; */
+        
+        // Method 4: Divide and Conquer
+        // didn't do that because so complicated
+        
+    }
+}
