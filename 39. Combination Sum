@@ -1,0 +1,24 @@
+import java.util.*;
+class Solution {
+    public List<List<Integer>> combinationSum(int[] candidates, int target) {
+        // Method: backtracking!
+        List<List<Integer>> solution=new ArrayList<>();
+        // Arrays.sort(candidates);
+        backTrack(solution, new ArrayList<>(), candidates, target, 0);
+        return solution;  
+    }
+    
+    public static void backTrack(List<List<Integer>> solution, ArrayList<Integer> tempList, int[] candidates, int remain, int start) {
+        if (remain<0) {
+            return;
+        } else if (remain==0) {
+            solution.add(new ArrayList<>(tempList));
+        } else {
+            for (int i=start; i<candidates.length; i++) {
+            tempList.add(candidates[i]);
+            backTrack(solution, tempList, candidates, remain-candidates[i], i);
+            tempList.remove(tempList.size()-1);
+            }
+        }       
+    }
+}
