@@ -1,0 +1,44 @@
+import java.util.*;
+class Solution {
+    public int singleNumber(int[] nums) {
+        
+        // Method 1: ArrayList Operation
+        // O(n) O(n)
+        
+          /*
+        // Method 2: Brute Force
+        // O(n^2) O(1)
+        for (int i=0; i<nums.length; i++) {
+            int count=0;
+            for (int j=0; j<nums.length; j++) {
+                if (nums[i]==nums[j]) count++;
+            }
+            if (count==1) return nums[i];
+        }
+        return -1; */
+        
+        
+        /*
+        // Method 3: HashMap
+        // O(n) O(n) Two passes
+        HashMap<Integer, Integer> seen=new HashMap<>();
+        for (int num : nums) {
+            seen.put(i, seen.getOrDefault(i,0)+1);
+        }
+        for (int num : nums) {
+            if (seen.get(num)==1) return num;
+        }  
+        return -1;  */
+        
+        // Method 4: HashSet and Math
+        // O(n) O(n)
+        
+        // Method 5: Bit Manipulation
+        int result=0;
+        for (int num : nums) {
+            result ^= num;
+        }
+        return result;   
+       
+    }
+}
