@@ -1,0 +1,41 @@
+import java.util.*;
+class Solution {
+    public boolean isHappy(int n) {
+        if (n<1) return false;
+        
+        /*
+        // Method 1: HashSet
+        HashSet<Integer> seen=new HashSet<>();
+        seen.add(n);
+        
+        while (n!=1) {
+            int sum=0;
+            while (n!=0) {
+                sum+=Math.pow(n%10, 2);
+                n /= 10;
+            }
+
+            if (seen.contains(sum)) {
+                return false; 
+            }
+            seen.add(sum);
+            n=sum;
+        }
+        
+        return true;  */
+        
+        // Method 2: O(1) space complexity
+        while (true) {
+            int sum=0;
+            while (n!=0) {
+                sum+=Math.pow(n%10, 2);
+                n /= 10;
+            }
+            if (sum/10==0) {
+                return sum==1 || sum==7;
+            }
+            n=sum;
+        }
+        
+    }
+}
