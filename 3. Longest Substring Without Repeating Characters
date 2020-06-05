@@ -1,0 +1,18 @@
+import java.util.*;
+class Solution {
+    public int lengthOfLongestSubstring(String s) {
+        // Best Method: Sliding window
+        // HashSet O(n) O(n)
+        HashSet<Character> set = new HashSet<>();
+        int maxCount=0, i=0, j=0;
+        while (j<s.length()) {
+            if (!set.contains(s.charAt(j))) {
+                set.add(s.charAt(j++));
+                maxCount=Math.max(maxCount, j-i);   // do not need to use if statement
+            } else {
+                set.remove(s.charAt(i++));
+            }
+        }
+        return maxCount;  
+    }
+}
