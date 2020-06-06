@@ -1,0 +1,20 @@
+import java.util.*;
+class Solution {
+    public boolean isValid(String s) {
+        // using stack O(n) O(n)
+        if (s == null || s.length() == 0) return true;
+        Stack<Character> seen = new Stack<>();
+        for (int i = 0; i < s.length(); i++) {
+            if (s.charAt(i) == '(' || s.charAt(i) == '{' || s.charAt(i) == '[') {
+                seen.push(s.charAt(i));
+            } else {
+                if (seen.isEmpty()) return false;
+                Character c = seen.pop();
+                if (s.charAt(i) == ')' && c != '(') return false;
+                if (s.charAt(i) == ']' && c != '[') return false;
+                if (s.charAt(i) == '}' && c != '{') return false;
+            }
+        }
+        return seen.isEmpty();
+    }
+}
