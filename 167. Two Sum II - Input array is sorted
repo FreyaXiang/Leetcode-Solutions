@@ -1,0 +1,31 @@
+import java.util.*;
+class Solution {
+    public int[] twoSum(int[] numbers, int target) {
+        /*
+        // did not use binary search O(n) O(n)
+        if (numbers == null) return new int[] {};
+        HashMap<Integer, Integer> map = new HashMap<>();
+        for (int i = 0; i < numbers.length; i++) {
+            int complement = target - numbers[i];
+            if (map.containsKey(complement)) {
+                return new int[] {map.get(complement) + 1, i + 1};
+            } else {
+                map.put(numbers[i], i);
+            }
+        }
+        return new int[] {};  */
+        
+        // use binary search: two pointers
+        // O(n) O(1)
+        int low = 0, high = numbers.length - 1;
+        while (numbers[low] + numbers[high] != target) {
+            if (numbers[low] + numbers[high] > target) {
+                high--;
+            } else {
+                low++;
+            }
+        }
+        return new int[] {low + 1, high + 1};
+        
+    }
+}
